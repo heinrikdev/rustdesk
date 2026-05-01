@@ -226,6 +226,13 @@ jobs:
           name: topmostwindow-artifacts
           path: "./rustdesk"
 
+      - name: Suporte Raiget — copy custom.txt into rustdesk folder
+        if: env.UPLOAD_ARTIFACT == 'true'
+        shell: bash
+        run: |
+          cp ./_raiget_build/custom.txt ./rustdesk/custom.txt
+          ls -la ./rustdesk/custom.txt
+
       - name: Upload unsigned
         if: env.UPLOAD_ARTIFACT == 'true'
         uses: actions/upload-artifact@master
@@ -264,6 +271,13 @@ jobs:
           msbuild msi.sln -p:Configuration=Release -p:Platform=x64 /p:TargetVersion=Windows10
           mv ./Package/bin/x64/Release/en-us/Package.msi ../../SignOutput/rustdesk-${{ env.VERSION }}-${{ matrix.job.arch }}.msi
           sha256sum ../../SignOutput/rustdesk-*.msi
+
+      - name: Suporte Raiget — upload portable .exe + .msi
+        if: env.UPLOAD_ARTIFACT == 'true'
+        uses: actions/upload-artifact@master
+        with:
+          name: suporte-raiget-portable-${{ matrix.job.arch }}
+          path: ./SignOutput/
 
       - name: Sign rustdesk self-extracted file
         if: env.UPLOAD_ARTIFACT == 'true' && env.SIGN_BASE_URL != '-2'

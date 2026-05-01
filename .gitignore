@@ -56,6 +56,9 @@ vcpkg_installed
 flutter/lib/generated_plugin_registrant.dart
 libsciter.dylib
 flutter/web/
-# Suporte Raiget customization (private signing key)
+# Suporte Raiget customization (private signing key + local build artifacts)
 _raiget_build/keypair.json
+libs/portable/data.bin
+libs/portable/app_metadata.toml
+libs/portable/Runner.res
 
