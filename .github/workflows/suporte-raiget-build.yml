@@ -1,0 +1,15 @@
+name: Suporte Raiget — Windows Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - suporte-raiget
+
+jobs:
+  build:
+    uses: ./.github/workflows/flutter-build.yml
+    secrets: inherit
+    with:
+      upload-artifact: true
+      upload-tag: "suporte-raiget"
